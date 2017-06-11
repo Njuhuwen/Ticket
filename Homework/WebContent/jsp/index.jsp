@@ -118,10 +118,9 @@ function submitForm(){
         data: {time:$("#datepicker").val(), movie:$("#navbar-search-input").val()},
         dataType: "json",
         success: function(data){
-               $("#cinema-list").append("<a href='#' class='list-group-item'>
-					    <h4 class='list-group-item-heading'>List group item heading</h4>
-					    <p class='list-group-item-text'>...</p>
-					  </a>")
+               $("#cinema-list").append("<a href='#' class='list-group-item'>"+
+					    "<h4 class='list-group-item-heading'>List group item heading</h4>"+
+					    "<p class='list-group-item-text'>...</p></a>")
 		}
 
 	});
