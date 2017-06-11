@@ -9,15 +9,25 @@ public class ShowVO {
 	private Date startTime;
 	private Date endTime;
 	private double price;
-	private Platform platform;
+	private String platform;
+	private double wish;
+	private String genre;//comedy...
+	private String type;//2D,3D...
 	
-	public ShowVO(String filmName, String cinemaName, Date startTime, Date endTime, double price, Platform platform) {
+	public ShowVO(String filmName, String cinemaName, Date startTime, Date endTime, double price, String platform, String genre, String type,Double wish) {
 		this.cinemaName = cinemaName;
 		this.filmName = filmName;
 		this.price = price;
 		this.endTime = endTime;
 		this.platform = platform;
 		this.startTime = startTime;
+		this.genre = genre;
+		this.type = type;
+		this.wish=wish;
+	}
+	
+	public String toString() {
+		return cinemaName + " " + filmName + " " + startTime + " " + endTime +  " " + genre + " " + type + " " + price + " " + platform;
 	}
 	
 	public String getFilmName() {
@@ -50,10 +60,35 @@ public class ShowVO {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	public Platform getPlatform() {
+	public String getPlatform() {
 		return platform;
 	}
-	public void setPlatform(Platform platform) {
+	public void setPlatform(String platform) {
 		this.platform = platform;
 	}
+
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public double getWish() {
+		return wish;
+	}
+
+	public void setWish(double wish) {
+		this.wish = wish;
+	}
+	
 }

@@ -12,6 +12,10 @@ public class CinemaVO {
 		this.addr = addr;
 	}
 	
+	public String toString() {
+		return id + ":" + name + ":" + addr;
+	}
+	
 	public int getId() {
 		return id;
 	}

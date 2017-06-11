@@ -118,9 +118,13 @@ function submitForm(){
         data: {time:$("#datepicker").val(), movie:$("#navbar-search-input").val()},
         dataType: "json",
         success: function(data){
-               $("#cinema-list").append("<a href='#' class='list-group-item'>"+
-					    "<h4 class='list-group-item-heading'>List group item heading</h4>"+
-					    "<p class='list-group-item-text'>...</p></a>")
+        
+        		$("#cinema-list").empty();
+        		for(var i=0;i<data[0].message.length;i++){
+	               $("#cinema-list").append("<a href='"+"/Homework/jsp/content.jsp?date="+$("#datepicker").val()+"&name="+$("#navbar-search-input").val()+"&cn="+data[0].message[i].name+"' class='list-group-item'>"+
+						    "<h4 class='list-group-item-heading'>"+data[0].message[i].name+"</h4>"+
+						    "<p class='list-group-item-text'>"+data[0].message[i].addr+"</p></a>")
+        		}
 		}
 
 	});

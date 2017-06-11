@@ -29,6 +29,7 @@ public class Detail extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session=request.getSession();
+		System.out.println(request.getAttribute("name"));
 		
 	//	response.sendRedirect("../Homework/jsp/content.jsp");
 		response.sendRedirect("jsp/content.jsp");

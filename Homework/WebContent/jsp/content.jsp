@@ -1,6 +1,11 @@
 <%@page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<%@page import="servlet.TestBean" %>
+<%@page import="java.text.SimpleDateFormat" %>
+<%@page import="java.util.Date" %>
+<%@page import="dataservice.SearchDataService" %>
+<%@page import="data.SearchDataImpl" %>
+<%@page import="vo.ShowVO" %>
+<%@page import="java.util.List" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -52,9 +57,14 @@
     </nav>
   </header>
 		<%
-			TestBean data=new TestBean();
-			data.setName("hang");
-        %>
+			SimpleDateFormat formatter = new SimpleDateFormat ("MM/dd/yyyy");
+        	Date date=formatter.parse(request.getParameter("date").toString());
+        	SearchDataService search=new SearchDataImpl();
+			List<List<ShowVO>> list=search.searchShow(date,request.getParameter("name").toString(),request.getParameter("cn").toString());
+       		
+		%>
+		
+        
    <div class="content-wrapper">
 	   <section class="content-header">
 	      <h1>
@@ -69,22 +79,27 @@
 			<div class="box box-default">
 			
 				<div class="box-header with-border">
-					<h3 class="box-title">信息列表</h3>
+					<h3 class="box-title"><%=request.getParameter("name").toString() %></h3>
 				</div>
 				
 				<div class="box-body">
 			
 					<div class="row">
-	        		<div class="col-md-8">
+					
+	        		<div class="col-md-9">
 						
 							<div class="list-group">
-							<%for(int i=0;i<3;i++){ %>
+							<%for(int i=0;i<list.size()&&list.get(0).size()!=0;i++){ 
+								List<ShowVO> l=list.get(i);
+							%>
+					
+							
 							<p></p>
 								<span class="label label-info">开始</span>
-								<span class="label label-warning">12:00</span>
+								<span class="label label-warning"><%=l.get(0).getStartTime() %></span>
 								
 								<span class="label label-info">结束</span>
-								<span class="label label-default">14:00</span>
+								<span class="label label-default"><%=l.get(0).getEndTime() %></span>
 						
 							<p></p>
 							
@@ -99,19 +114,22 @@
 				                  <th>wish</th>
 				                  <th>价格</th>
 				                </tr>
-				                <%for(int j=0;j<4;j++){ %>
+				                <%for(int j=0;j<l.size();j++){ 
+				                	ShowVO show=l.get(j);
+				                %>
 						             <tr>
-						                  <td style="width: 60px"><span class="badge bg-blue">美团</span></td>
-						                  <td>英语</td>
-						                  <td>剧情</td>
-						                  <td>2D/3D</td>
-						                  <td>史密斯</td>
-						                  <td>小李子</td>
-						                  <td style="width: 60px"><span class="badge bg-yellow">3012</span></td>
-						                  <td style="width: 60px"><span class="badge bg-red">29.9</span></td>
+						                  <td style="width: 60px"><span class="badge bg-blue"><%=show.getPlatform() %></span></td>
+						                  <td></td>
+						                  <td><%=show.getGenre() %></td>
+						                  <td><%=show.getType() %></td>
+						                  <td></td>
+						                  <td></td>
+						                  <td style="width: 60px"><span class="badge bg-yellow"><%=show.getWish() %></span></td>
+						                  <td style="width: 60px"><span class="badge bg-red"><%=show.getPrice() %></span></td>
 						             </tr>
 				                <%} %>
 				               </table>
+				              
 							<%} %>
 							
 							  
